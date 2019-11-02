@@ -36,7 +36,7 @@ class ViewController: UIViewController, ImagePickerDelegate {
   }
 
   @objc func buttonTouched(button: UIButton) {
-    var config = Configuration()
+    let config = Configuration()
     config.doneButtonTitle = "Finish"
     config.noImagesTitle = "Sorry! There are no images here!"
     config.recordLocation = false
@@ -44,7 +44,7 @@ class ViewController: UIViewController, ImagePickerDelegate {
 
     let imagePicker = ImagePickerController(configuration: config)
     imagePicker.delegate = self
-
+    imagePicker.modalPresentationStyle = .overFullScreen
     present(imagePicker, animated: true, completion: nil)
   }
 
