@@ -84,7 +84,7 @@ open class ImagePickerController: UIViewController {
   open var doneButtonTitle: String? {
     didSet {
       if let doneButtonTitle = doneButtonTitle {
-        bottomContainer.doneButton.setTitle(doneButtonTitle, for: UIControlState())
+        bottomContainer.doneButton.setTitle(doneButtonTitle, for: [])
       }
     }
   }
@@ -161,8 +161,7 @@ open class ImagePickerController: UIViewController {
 
     applyOrientationTransforms()
 
-    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification,
-                                    bottomContainer);
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, bottomContainer);
   }
 
   open func resetAssets() {
@@ -190,7 +189,7 @@ open class ImagePickerController: UIViewController {
     let alertController = UIAlertController(title: configuration.requestPermissionTitle, message: configuration.requestPermissionMessage, preferredStyle: .alert)
 
     let alertAction = UIAlertAction(title: configuration.OKButtonTitle, style: .default) { _ in
-      if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+        if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
         UIApplication.shared.openURL(settingsURL)
       }
     }
@@ -234,7 +233,7 @@ open class ImagePickerController: UIViewController {
       selector: #selector(adjustButtonTitle(_:)),
       name: NSNotification.Name(rawValue: ImageStack.Notifications.imageDidDrop),
       object: nil)
-    
+  
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(dismissIfNeeded),
                                            name: NSNotification.Name(rawValue: ImageStack.Notifications.imageDidDrop),
@@ -277,7 +276,7 @@ open class ImagePickerController: UIViewController {
 
     let title = !sender.assets.isEmpty ?
       configuration.doneButtonTitle : configuration.cancelButtonTitle
-    bottomContainer.doneButton.setTitle(title, for: UIControlState())
+    bottomContainer.doneButton.setTitle(title, for: [])
   }
   
   @objc func dismissIfNeeded() {
